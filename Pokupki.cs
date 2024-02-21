@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//добавить выбор размерности покупки-шт/кг/г/л
+﻿
 namespace SpisokPokupok
 {
     internal class Pokupki
     {
         string nazvanie;
         int kolichestvo;
+        string mera;
         int cena;
 
-        public Pokupki(string _nazvanie,int _kolichestvo,int _cena)
+        public Pokupki(string _nazvanie, int _kolichestvo, string _mera, int _cena)
         {
             nazvanie = _nazvanie;
             kolichestvo = _kolichestvo;
+            mera = _mera;
             cena = _cena;
         }
         public int SummaPokupki()
@@ -24,7 +21,8 @@ namespace SpisokPokupok
         }
         public string ShowInfo()
         {
-            string str = nazvanie+"   "+kolichestvo.ToString()+"шт./кг.   "+cena.ToString()+"руб.";
+            //string str = nazvanie + "   " + kolichestvo.ToString() + mera + " " + cena.ToString() + "руб.";
+            string str = $"{nazvanie}  {kolichestvo.ToString()}{mera} {cena.ToString()}руб.";
             return str;
         }
     }
