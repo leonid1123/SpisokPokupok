@@ -1,0 +1,10 @@
+D:\repos\SpisokPokupok\bin\Debug\SpisokPokupok.exe.config
+D:\repos\SpisokPokupok\bin\Debug\SpisokPokupok.exe
+D:\repos\SpisokPokupok\bin\Debug\SpisokPokupok.pdb
+D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.csproj.AssemblyReference.cache
+D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.Form1.resources
+D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.Properties.Resources.resources
+D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.csproj.GenerateResource.cache
+D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.csproj.CoreCompileInputs.cache
+D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.exe
+D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.pdb
