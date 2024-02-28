@@ -17,7 +17,14 @@ namespace SpisokPokupok
         }
         public int SummaPokupki()
         {
-            return kolichestvo * cena;
+            if (mera.Equals("г."))
+            {
+                return kolichestvo * cena / 1000;
+            }
+            else
+            {
+                return kolichestvo * cena;
+            }
         }
         public string ShowInfo()
         {

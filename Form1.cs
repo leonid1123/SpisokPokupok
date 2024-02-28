@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using MySqlConnector;
+
 //поправить граммы, разобраться с галочками.
 namespace SpisokPokupok
 {
     public partial class Form1 : Form
     {
         List<Pokupki> SpisokPokupok = new List<Pokupki>();
+        
         public Form1()
         {
             InitializeComponent();
@@ -41,7 +44,16 @@ namespace SpisokPokupok
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try {
+                MySqlConnection connection = new MySqlConnection("Server=localhost;User ID=pk31;Password=pk31;Database=pk31spisokpokupok");
+                connection.Open();
+                Console.WriteLine(connection.State);
+            } catch(Exception ex ) { 
+                Console.WriteLine("pup"+ex.ToString());
+                //отловить код ошибки подключения к БД
+            }
             comboBox1.SelectedIndex = 0;
+            //label6.Font = new Font(label6.Font, label6.Font.Style ^ FontStyle.Strikeout); 
         }
         int Itogo(List<Pokupki> _mySpisok)
         {
@@ -51,6 +63,11 @@ namespace SpisokPokupok
                 summa += item.SummaPokupki();
             }
             return summa;
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            
         }
     }
 }
