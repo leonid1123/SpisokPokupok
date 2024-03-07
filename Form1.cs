@@ -8,8 +8,8 @@ namespace SpisokPokupok
 {
     public partial class Form1 : Form
     {
-        List<Pokupki> SpisokPokupok = new List<Pokupki>();
-        
+        //List<Pokupki> SpisokPokupok = new List<Pokupki>();
+        MySqlConnection conn;
         public Form1()
         {
             InitializeComponent();
@@ -20,10 +20,25 @@ namespace SpisokPokupok
             string nazvanieProdukta = textBox1.Text.Trim();
             if (nazvanieProdukta.Length > 2)
             {
-                Pokupki pokupka = new Pokupki(nazvanieProdukta, (int)numericUpDown1.Value, comboBox1.Text, (int)numericUpDown2.Value);
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "INSERT INTO `spisokpokupok`(`Name`, `quantity`, `mera`, `price`) VALUES (@name,@quantity,@mera,@price);";
+                cmd.Parameters.AddWithValue("name", nazvanieProdukta);
+                cmd.Parameters.AddWithValue("quantity", numericUpDown1.Value);
+                cmd.Parameters.AddWithValue("mera", comboBox1.Text);
+                cmd.Parameters.AddWithValue("price", numericUpDown2.Value);
+                cmd.ExecuteNonQuery();
+
+                MySqlCommand command = new MySqlCommand("SELECT * FROM spisokpokupok;", conn);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                    Console.WriteLine(reader.GetString(0));
+
+                /*Pokupki pokupka = new Pokupki(nazvanieProdukta, (int)numericUpDown1.Value, comboBox1.Text, (int)numericUpDown2.Value);
                 SpisokPokupok.Add(pokupka);
                 checkedListBox1.Items.Add(pokupka.ShowInfo());
                 label1.Text = $"ИТОГО: {Itogo(SpisokPokupok)}руб.";
+                */
             }
             else
             {
@@ -32,7 +47,8 @@ namespace SpisokPokupok
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {//удалить из списка          
+        {//удалить из списка
+         /*
             int index = checkedListBox1.SelectedIndex;
             if (index > -1)
             {
@@ -40,6 +56,7 @@ namespace SpisokPokupok
                 SpisokPokupok.RemoveAt(index);
             }
             label1.Text = $"ИТОГО: {Itogo(SpisokPokupok)}руб.";
+         */
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,8 +65,9 @@ namespace SpisokPokupok
                 MySqlConnection connection = new MySqlConnection("Server=localhost;User ID=pk31;Password=pk31;Database=pk31spisokpokupok");
                 connection.Open();
                 Console.WriteLine(connection.State);
+                conn = connection;
             } catch(Exception ex ) { 
-                Console.WriteLine("pup"+ex.ToString());
+                Console.WriteLine(ex.ToString());
                 //отловить код ошибки подключения к БД
             }
             comboBox1.SelectedIndex = 0;

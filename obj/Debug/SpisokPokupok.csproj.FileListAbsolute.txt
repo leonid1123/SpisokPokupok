@@ -24,4 +24,4 @@ D:\repos\SpisokPokupok\bin\Debug\System.Memory.xml
 D:\repos\SpisokPokupok\bin\Debug\System.Numerics.Vectors.xml
 D:\repos\SpisokPokupok\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\repos\SpisokPokupok\bin\Debug\System.Threading.Tasks.Extensions.xml
-D:\repos\SpisokPokupok\obj\Debug\SpisokPokupok.csproj.CopyComplete
+D:\repos\SpisokPokupok\obj\Debug\SpisokPo.A8CD755A.Up2Date
