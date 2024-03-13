@@ -65,7 +65,6 @@
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(892, 436);
             this.checkedListBox1.TabIndex = 1;
-            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             // 
             // button2
             // 
@@ -99,7 +98,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numericUpDown1.Location = new System.Drawing.Point(403, 61);
+            this.numericUpDown1.Location = new System.Drawing.Point(403, 62);
             this.numericUpDown1.Minimum = new decimal(new int[] {
             1,
             0,
