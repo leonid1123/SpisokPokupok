@@ -30,7 +30,14 @@ namespace SpisokPokupok
                 cmd.Parameters.AddWithValue("name", nazvanieProdukta);
                 cmd.Parameters.AddWithValue("quantity", numericUpDown1.Value);
                 cmd.Parameters.AddWithValue("mera", comboBox1.Text);
-                cmd.Parameters.AddWithValue("price", numericUpDown2.Value);
+                if (comboBox1.Text.Equals("г."))
+                {
+                    cmd.Parameters.AddWithValue("price", numericUpDown2.Value / 1000);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("price", numericUpDown2.Value);
+                }
                 cmd.ExecuteNonQuery();
 
                 DBOutput(conn);
@@ -93,8 +100,17 @@ namespace SpisokPokupok
             checkedListBox1.Items.Clear();
             while (reader.Read())
             {
-                string sql = $"{reader.GetString(0)} {reader.GetInt32(1)}{reader.GetString(2)} {reader.GetInt32(3)}руб.";
+                string sql = $"{reader.GetString(0)} {reader.GetInt32(1)}{reader.GetString(2)} {reader.GetFloat(3)}руб.";
                 checkedListBox1.Items.Add(sql);
+            }
+            reader.Close();
+            //SELECT SUM(`quantity`*`price`) FROM `spisokpokupok` 
+            command.CommandText = "SELECT SUM(`quantity`*`price`) FROM `spisokpokupok`;";
+            command.ExecuteNonQuery();
+            MySqlDataReader sumReader = command.ExecuteReader();
+            while (sumReader.Read())
+            {
+                label1.Text = $"ИТОГО: {sumReader.GetFloat(0)}руб.";
             }
             _conn.Close();
         }

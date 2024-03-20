@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "D:\\repos\\SpisokPokupok\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8997C782-9945-4425-B4EE-91E7ADE87E03}|SpisokPokupok.csproj|d:\\repos\\spisokpokupok\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8997C782-9945-4425-B4EE-91E7ADE87E03}|SpisokPokupok.csproj|D:\\repos\\SpisokPokupok\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8997C782-9945-4425-B4EE-91E7ADE87E03}|SpisokPokupok.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8997C782-9945-4425-B4EE-91E7ADE87E03}|SpisokPokupok.csproj|D:\\repos\\SpisokPokupok\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{8997C782-9945-4425-B4EE-91E7ADE87E03}|SpisokPokupok.csproj|d:\\repos\\spisokpokupok\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{8997C782-9945-4425-B4EE-91E7ADE87E03}|SpisokPokupok.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -44,7 +44,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\repos\\SpisokPokupok\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAA/wBUAAAAcAAAA",
+              "ViewState": "AQIAAGAAAAAAAAAAAAAYwGkAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-14T11:06:28.336Z",
               "EditorCaption": ""
@@ -59,8 +59,7 @@
               "RelativeToolTip": "Pokupki.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-15T09:26:37.475Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-15T09:26:37.475Z"
             }
           ]
         }
