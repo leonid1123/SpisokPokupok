@@ -4,12 +4,13 @@ using System.Data;
 using System.Windows.Forms;
 using MySqlConnector;
 
-//поправить граммы, разобраться с галочками.
 namespace SpisokPokupok
 {
     public partial class Form1 : Form
     {
         MySqlConnection conn;
+        MySqlCommand cmdGlobal = new MySqlCommand();
+        List<int> idList = new List<int>();
         public Form1()
         {
             InitializeComponent();
@@ -24,21 +25,22 @@ namespace SpisokPokupok
             string nazvanieProdukta = textBox1.Text.Trim();
             if (nazvanieProdukta.Length > 2)
             {
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "INSERT INTO `spisokpokupok`(`Name`, `quantity`, `mera`, `price`) VALUES (@name,@quantity,@mera,@price);";
-                cmd.Parameters.AddWithValue("name", nazvanieProdukta);
-                cmd.Parameters.AddWithValue("quantity", numericUpDown1.Value);
-                cmd.Parameters.AddWithValue("mera", comboBox1.Text);
+                //MySqlCommand cmd = new MySqlCommand();
+                cmdGlobal.Connection = conn;
+                cmdGlobal.CommandText = "INSERT INTO `spisokpokupok`(`Name`, `quantity`, `mera`, `price`) VALUES (@name,@quantity,@mera,@price);";
+                cmdGlobal.Parameters.Clear();
+                cmdGlobal.Parameters.AddWithValue("name", nazvanieProdukta);
+                cmdGlobal.Parameters.AddWithValue("quantity", numericUpDown1.Value);
+                cmdGlobal.Parameters.AddWithValue("mera", comboBox1.Text);
                 if (comboBox1.Text.Equals("г."))
                 {
-                    cmd.Parameters.AddWithValue("price", numericUpDown2.Value / 1000);
+                    cmdGlobal.Parameters.AddWithValue("price", numericUpDown2.Value / 1000);
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("price", numericUpDown2.Value);
+                    cmdGlobal.Parameters.AddWithValue("price", numericUpDown2.Value);
                 }
-                cmd.ExecuteNonQuery();
+                cmdGlobal.ExecuteNonQuery();
 
                 DBOutput(conn);
                 textBox1.Clear();
@@ -54,7 +56,19 @@ namespace SpisokPokupok
 
         private void button1_Click(object sender, EventArgs e)
         {//удалить из списка
-
+            //DELETE FROM `spisokpokupok` WHERE `id`=2
+            if (checkedListBox1.SelectedIndex > -1)
+            {
+                string sql = "DELETE FROM `spisokpokupok` WHERE `id`=@zombie";
+                cmdGlobal.CommandText = sql;
+                cmdGlobal.Connection = conn;
+                cmdGlobal.Parameters.Clear();
+                cmdGlobal.Parameters.AddWithValue("zombie", idList[checkedListBox1.SelectedIndex]);
+                conn.Open();
+                cmdGlobal.ExecuteNonQuery();
+                conn.Close();
+                DBOutput(conn);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -74,20 +88,6 @@ namespace SpisokPokupok
             comboBox1.SelectedIndex = 0;
             DBOutput(conn);
         }
-        int Itogo(List<Pokupki> _mySpisok)
-        {
-            int summa = 0;
-            foreach (var item in _mySpisok)
-            {
-                summa += item.SummaPokupki();
-            }
-            return summa;
-        }
-
-        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-
-        }
         void DBOutput(MySqlConnection _conn)
         {//метод для получения всей таблицы и вывода в листбокс
             if (_conn.State != ConnectionState.Open)
@@ -95,19 +95,23 @@ namespace SpisokPokupok
                 _conn.Open();
             }
 
-            MySqlCommand command = new MySqlCommand("SELECT `Name`, `quantity`, `mera`, `price` FROM `spisokpokupok`;", _conn);
-            MySqlDataReader reader = command.ExecuteReader();
+            //MySqlCommand command = new MySqlCommand("SELECT `Name`, `quantity`, `mera`, `price`, `id` FROM `spisokpokupok`;", _conn);
+            cmdGlobal.CommandText = "SELECT `Name`, `quantity`, `mera`, `price`, `id` FROM `spisokpokupok`;";
+            cmdGlobal.Connection = _conn;
+            MySqlDataReader reader = cmdGlobal.ExecuteReader();
             checkedListBox1.Items.Clear();
+            idList.Clear();
             while (reader.Read())
             {
                 string sql = $"{reader.GetString(0)} {reader.GetInt32(1)}{reader.GetString(2)} {reader.GetFloat(3)}руб.";
                 checkedListBox1.Items.Add(sql);
+                idList.Add(reader.GetInt32(4));
             }
             reader.Close();
             //SELECT SUM(`quantity`*`price`) FROM `spisokpokupok` 
-            command.CommandText = "SELECT SUM(`quantity`*`price`) FROM `spisokpokupok`;";
-            command.ExecuteNonQuery();
-            MySqlDataReader sumReader = command.ExecuteReader();
+            cmdGlobal.CommandText = "SELECT SUM(`quantity`*`price`) FROM `spisokpokupok`;";
+            cmdGlobal.ExecuteNonQuery();
+            MySqlDataReader sumReader = cmdGlobal.ExecuteReader();
             while (sumReader.Read())
             {
                 label1.Text = $"ИТОГО: {sumReader.GetFloat(0)}руб.";
